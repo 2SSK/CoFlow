@@ -1,7 +1,11 @@
+// Configuration for providers
 export default {
     providers: [
         {
-            domain: "https://your-issuer-url.clerk.accounts.dev/",
+            // Specify the domain for the provider
+            domain: "https://fleet-jay-16.clerk.accounts.dev",
+
+            // Specify the application ID for the provider
             applicationID: "convex",
         },
     ],
