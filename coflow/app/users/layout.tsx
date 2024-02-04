@@ -5,7 +5,9 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
     return (
         <div className="flex flex-col gap-y-4">
-            <nav>I am a reusable navbar!</nav>
+            <nav className="text-xl  px-1 py-1 bg-red-500 text-white">
+                I am a reusable navbar!
+            </nav>
             {children}
         </div>
     );
