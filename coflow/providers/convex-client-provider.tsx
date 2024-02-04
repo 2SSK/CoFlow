@@ -6,6 +6,7 @@ import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { AuthLoading, Authenticated, ConvexReactClient } from "convex/react";
 import { ConvexClientProvider as LocalConvexClientProvider } from "./convex-client-provider";
 import { Children } from "react";
+import { Loading } from "../components/auth/loading";
 
 // Defining the props for ConvexClientProvider component
 interface ConvexClientProviderProps {
@@ -26,7 +27,10 @@ export const ConvexClientProvider = ({
         // Wrapping the application with ClerkProvider and ConvexProviderWithClerk
         <ClerkProvider>
             <ConvexProviderWithClerk useAuth={useAuth} client={convex}>
-                {children}
+                <Authenticated>{children}</Authenticated>
+                <AuthLoading>
+                    <Loading />
+                </AuthLoading>
             </ConvexProviderWithClerk>
         </ClerkProvider>
     );
