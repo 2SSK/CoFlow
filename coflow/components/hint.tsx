@@ -39,5 +39,3 @@ export const Hint = ({
         </TooltipProvider>
     );
 };
-
-// 1:35:00
