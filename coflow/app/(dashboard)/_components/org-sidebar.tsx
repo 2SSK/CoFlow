@@ -22,7 +22,7 @@ export const OrgSidebar: React.FC = () => {
     const favourites = searchParams.get("favourites");
 
     return (
-        <div className="hidden lg:flex flex-col space-y-6 w-[206px] pl-5 pr-2 pt-5 bg-gray-50 bg-opacity-50">
+        <div className="hidden lg:flex flex-col space-y-6 w-[206px] pl-5 pr-2 pt-5">
             <Link href="/">
                 <div className="flex items-center gap-x-2">
                     <Image src="/logo.svg" alt="Logo" height={60} width={60} />
