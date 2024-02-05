@@ -1,6 +1,6 @@
-# coFlow
+# CoFlow
 
-coFlow is a collaborative platform designed for efficient team collaboration, brainstorming, and project planning. It provides a virtual canvas for teams to ideate and innovate in real-time.
+CoFlow is a collaborative platform designed for efficient team collaboration, brainstorming, and project planning. It provides a virtual canvas for teams to ideate and innovate in real-time.
 
 ## Features
 
