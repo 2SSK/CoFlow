@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ConvexClientProvider } from "@/providers/convex-client-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 // Creating an instance of the Inter font with the Latin subset
 const inter = Inter({ subsets: ["latin"] });
@@ -21,11 +22,13 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        // Basic HTML structure with lang attributes set to "en"
         <html lang="en">
             <body className={inter.className}>
                 {/* Wrapping the application with ConvexClientProvider for authentication and Convex context */}
-                <ConvexClientProvider>{children}</ConvexClientProvider>
+                <ConvexClientProvider>
+                    <Toaster />
+                    {children}
+                </ConvexClientProvider>
             </body>
         </html>
     );
