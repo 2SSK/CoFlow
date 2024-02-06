@@ -1,13 +1,19 @@
 "use client";
 
-import Image from "next/image";
+// Importing necessary libraries and components
 import Link from "next/link";
-import { Overlay } from "./overlay";
-import { formatDistanceToNow } from "date-fns";
+import Image from "next/image";
 import { useAuth } from "@clerk/nextjs";
-import { Footer } from "./footer";
+import { MoreHorizontal } from "lucide-react";
+import { formatDistanceToNow } from "date-fns";
+
+import { Actions } from "@/components/actions";
 import { Skeleton } from "@/components/ui/skeleton";
 
+import { Footer } from "./footer";
+import { Overlay } from "./overlay";
+
+// Interface for the props of the BoardCard component
 interface BoardCardProps {
     id: string;
     title: string;
@@ -19,6 +25,7 @@ interface BoardCardProps {
     isFavourite: boolean;
 }
 
+// BoardCard component
 export const BoardCard = ({
     id,
     title,
@@ -29,6 +36,7 @@ export const BoardCard = ({
     orgId,
     isFavourite,
 }: BoardCardProps) => {
+    // Using th useAuth hook to get the current user's ID
     const { userId } = useAuth();
 
     const authorLabel = userId === authorId ? "You" : authorName;
@@ -47,6 +55,11 @@ export const BoardCard = ({
                         className="object-fit"
                     />
                     <Overlay />
+                    <Actions id={id} title={title} side="right">
+                        <button className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity px-3 py-2 outline-none">
+                            <MoreHorizontal className="text-white opacity-75 hover:opacity-100 transition-opacity" />
+                        </button>
+                    </Actions>
                 </div>
                 <Footer
                     isFavourite={isFavourite}
