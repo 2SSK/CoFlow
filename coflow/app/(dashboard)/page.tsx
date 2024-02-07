@@ -7,7 +7,7 @@ import { BoardList } from "./_components/board-list";
 interface DasboardPageProps {
     searchParams: {
         search?: string;
-        favourites?: string;
+        Favorites?: string;
     };
 }
 

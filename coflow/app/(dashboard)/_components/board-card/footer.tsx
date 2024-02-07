@@ -5,7 +5,7 @@ interface FooterProps {
     title: string;
     authorLabel: string;
     createdAtLabel: string;
-    isFavourite: boolean;
+    isFavorite: boolean;
     onClick: () => void;
     disabled: boolean;
 }
@@ -14,7 +14,7 @@ export const Footer = ({
     title,
     authorLabel,
     createdAtLabel,
-    isFavourite,
+    isFavorite,
     onClick,
     disabled,
 }: FooterProps) => {
@@ -46,7 +46,7 @@ export const Footer = ({
                 <Star
                     className={cn(
                         "h-4 w-4",
-                        isFavourite && "fill-blue-600 text-blue-600"
+                        isFavorite && "fill-blue-600 text-blue-600"
                     )}
                 />
             </button>

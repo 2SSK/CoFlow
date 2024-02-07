@@ -25,7 +25,7 @@ interface BoardCardProps {
     createdAt: number;
     imageUrl: string;
     orgId: string;
-    isFavourite: boolean;
+    isFavorite: boolean;
 }
 
 // BoardCard component
@@ -37,7 +37,7 @@ export const BoardCard = ({
     createdAt,
     imageUrl,
     orgId,
-    isFavourite,
+    isFavorite,
 }: BoardCardProps) => {
     // Using th useAuth hook to get the current user's ID
     const { userId } = useAuth();
@@ -47,20 +47,20 @@ export const BoardCard = ({
         addSuffix: true,
     });
 
-    const { mutate: onFavourite, pending: pendingFavourite } = useApiMutation(
-        api.board.favourite
+    const { mutate: onFavorite, pending: pendingFavorite } = useApiMutation(
+        api.board.Favorite
     );
-    const { mutate: onUnfavourite, pending: pendingUnfavourite } =
-        useApiMutation(api.board.unfavourite);
+    const { mutate: onUnFavorite, pending: pendingUnFavorite } =
+        useApiMutation(api.board.unFavorite);
 
-    const toggleFavourite = () => {
-        if (isFavourite) {
-            onUnfavourite({ id, orgId }).catch(() =>
-                toast.error("Failed to unFavourite")
+    const toggleFavorite = () => {
+        if (isFavorite) {
+            onUnFavorite({ id, orgId }).catch(() =>
+                toast.error("Failed to unFavorite")
             );
         } else {
-            onFavourite({ id, orgId }).catch(() =>
-                toast.error("Failed to favourite")
+            onFavorite({ id, orgId }).catch(() =>
+                toast.error("Failed to Favorite")
             );
         }
     };
@@ -83,12 +83,12 @@ export const BoardCard = ({
                     </Actions>
                 </div>
                 <Footer
-                    isFavourite={isFavourite}
+                    isFavorite={isFavorite}
                     title={title}
                     authorLabel={authorLabel}
                     createdAtLabel={createdAtLabel}
-                    onClick={toggleFavourite}
-                    disabled={pendingFavourite || pendingUnfavourite}
+                    onClick={toggleFavorite}
+                    disabled={pendingFavorite || pendingUnFavorite}
                 />
             </div>
         </Link>
