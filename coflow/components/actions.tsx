@@ -2,7 +2,7 @@
 
 import { toast } from "sonner";
 import { Button } from "./ui/button";
-import { Link2, Trash2 } from "lucide-react";
+import { Link2, Pencil, Trash2 } from "lucide-react";
 import { DropdownMenuContentProps } from "@radix-ui/react-dropdown-menu";
 
 import {
@@ -17,6 +17,7 @@ import { api } from "@/convex/_generated/api";
 import { useApiMutation } from "@/hooks/use-api-mutation";
 
 import { ConfirmModal } from "@/components/confirm-modal";
+import { useRenameModal } from "@/store/use-rename-modal";
 
 interface ActionProps {
     children: React.ReactNode;
@@ -33,6 +34,7 @@ export const Actions = ({
     id,
     title,
 }: ActionProps) => {
+    const { onOpen } = useRenameModal();
     const { mutate, pending } = useApiMutation(api.board.remove);
 
     const onCopyLink = () => {
@@ -65,6 +67,14 @@ export const Actions = ({
                     Copy board link
                 </DropdownMenuItem>
 
+                <DropdownMenuItem
+                    onClick={() => onOpen(id, title)}
+                    className="p-3 cursor-pointer"
+                >
+                    <Pencil className="h-4 w-4 mr-2" />
+                    Rename
+                </DropdownMenuItem>
+
                 <ConfirmModal
                     header="Delete board?"
                     description="This will delete the board and all of its contents."
@@ -83,5 +93,3 @@ export const Actions = ({
         </DropdownMenu>
     );
 };
-
-// 3:35:03

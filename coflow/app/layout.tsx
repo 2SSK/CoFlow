@@ -2,8 +2,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ConvexClientProvider } from "@/providers/convex-client-provider";
+
 import { Toaster } from "@/components/ui/sonner";
+import { ConvexClientProvider } from "@/providers/convex-client-provider";
+import { ModalProvider } from "@/providers/modal-provider";
 
 // Creating an instance of the Inter font with the Latin subset
 const inter = Inter({ subsets: ["latin"] });
@@ -27,6 +29,7 @@ export default function RootLayout({
                 {/* Wrapping the application with ConvexClientProvider for authentication and Convex context */}
                 <ConvexClientProvider>
                     <Toaster />
+                    <ModalProvider />
                     {children}
                 </ConvexClientProvider>
             </body>
