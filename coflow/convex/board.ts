@@ -92,7 +92,7 @@ export const update = mutation({
     },
 });
 
-export const Favorite = mutation({
+export const favorite = mutation({
     args: { id: v.id("boards"), orgId: v.string() },
     handler: async (ctx, args) => {
         const identity = await ctx.auth.getUserIdentity();
@@ -117,7 +117,7 @@ export const Favorite = mutation({
             .unique();
 
         if (existingFavorite) {
-            throw new Error("Board already Favorited");
+            throw new Error("Board already favorited");
         }
 
         await ctx.db.insert("userFavorites", {
@@ -130,8 +130,8 @@ export const Favorite = mutation({
     },
 });
 
-export const unFavorite = mutation({
-    args: { id: v.id("boards"), orgId: v.string() },
+export const unfavorite = mutation({
+    args: { id: v.id("boards") },
     handler: async (ctx, args) => {
         const identity = await ctx.auth.getUserIdentity();
 
@@ -159,6 +159,7 @@ export const unFavorite = mutation({
         }
 
         await ctx.db.delete(existingFavorite._id);
+
         return board;
     },
 });

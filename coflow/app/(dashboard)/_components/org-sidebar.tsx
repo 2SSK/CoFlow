@@ -19,7 +19,7 @@ const font = Poppins({
 
 export const OrgSidebar: React.FC = () => {
     const searchParams = useSearchParams();
-    const Favorites = searchParams.get("Favorites");
+    const favorites = searchParams.get("favorites");
 
     return (
         <div className="hidden lg:flex flex-col space-y-6 w-[206px] pl-5 pr-2 pt-5">
@@ -56,7 +56,7 @@ export const OrgSidebar: React.FC = () => {
             />
             <div className="space-y-1 w-full">
                 <Button
-                    variant={Favorites ? "ghost" : "secondary"}
+                    variant={favorites ? "ghost" : "secondary"}
                     asChild
                     size="lg"
                     className="font-normal justify-start px-2 w-full"
@@ -68,7 +68,7 @@ export const OrgSidebar: React.FC = () => {
                 </Button>
                 {/*  */}
                 <Button
-                    variant={Favorites ? "secondary" : "ghost"}
+                    variant={favorites ? "secondary" : "ghost"}
                     asChild
                     size="lg"
                     className="font-normal justify-start px-2 w-full"
@@ -77,7 +77,7 @@ export const OrgSidebar: React.FC = () => {
                         href={{
                             pathname: "/",
                             query: {
-                                Favorites: true,
+                                favorites: true,
                             },
                         }}
                     >

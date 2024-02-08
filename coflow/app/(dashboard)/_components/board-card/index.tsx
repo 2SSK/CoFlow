@@ -48,19 +48,20 @@ export const BoardCard = ({
     });
 
     const { mutate: onFavorite, pending: pendingFavorite } = useApiMutation(
-        api.board.Favorite
+        api.board.favorite
     );
-    const { mutate: onUnFavorite, pending: pendingUnFavorite } =
-        useApiMutation(api.board.unFavorite);
+    const { mutate: onUnfavorite, pending: pendingUnfavorite } = useApiMutation(
+        api.board.unfavorite
+    );
 
     const toggleFavorite = () => {
         if (isFavorite) {
-            onUnFavorite({ id, orgId }).catch(() =>
-                toast.error("Failed to unFavorite")
+            onUnfavorite({ id }).catch(() =>
+                toast.error("Failed to unfavorite")
             );
         } else {
             onFavorite({ id, orgId }).catch(() =>
-                toast.error("Failed to Favorite")
+                toast.error("Failed to favorite")
             );
         }
     };
@@ -88,7 +89,7 @@ export const BoardCard = ({
                     authorLabel={authorLabel}
                     createdAtLabel={createdAtLabel}
                     onClick={toggleFavorite}
-                    disabled={pendingFavorite || pendingUnFavorite}
+                    disabled={pendingFavorite || pendingUnfavorite}
                 />
             </div>
         </Link>

@@ -6,7 +6,7 @@ export const get = query({
     args: {
         orgId: v.string(),
         search: v.optional(v.string()),
-        Favorite: v.optional(v.string()),
+        favorites: v.optional(v.string()),
     },
     handler: async (ctx, args) => {
         const identity = await ctx.auth.getUserIdentity();
@@ -15,8 +15,8 @@ export const get = query({
             throw new Error("Unauthorized");
         }
 
-        if (args.Favorite) {
-            const FavoritedBoards = await ctx.db
+        if (args.favorites) {
+            const favoritedBoards = await ctx.db
                 .query("userFavorites")
                 .withIndex("by_user_org", (q) =>
                     q.eq("userId", identity.subject).eq("orgId", args.orgId)
@@ -24,7 +24,7 @@ export const get = query({
                 .order("desc")
                 .collect();
 
-            const ids = FavoritedBoards.map((b) => b.boardId);
+            const ids = favoritedBoards.map((b) => b.boardId);
 
             const boards = await getAllOrThrow(ctx.db, ids);
 
@@ -59,10 +59,10 @@ export const get = query({
                     q.eq("userId", identity.subject).eq("boardId", board._id)
                 )
                 .unique()
-                .then((Favorite) => {
+                .then((favorite) => {
                     return {
                         ...board,
-                        isFavorite: !!Favorite,
+                        isFavorite: !!favorite,
                     };
                 });
         });
