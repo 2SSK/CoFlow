@@ -28,5 +28,3 @@ export const CursorsPresence = memo(() => {
 });
 
 CursorsPresence.displayName = "CursorsPresence";
-
-// 6:47:44
