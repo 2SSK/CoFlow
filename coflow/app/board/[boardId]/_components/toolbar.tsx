@@ -12,7 +12,6 @@ import {
 import { CanvasMode, CanvasState, LayerType } from "@/types/canvas";
 
 import { ToolButton } from "./tool-button";
-import { set } from "date-fns";
 
 interface ToolbarProps {
     canvasState: CanvasState;
@@ -139,5 +138,3 @@ export const ToolbarSkeleton = () => {
         <div className="absolute top-[50%] -translate-y-[50%] left-2 flex flex-col gap-y-4 bg-white h-[360px] w-[52px] shadow-md rounded-md" />
     );
 };
-
-// 6:21:38
