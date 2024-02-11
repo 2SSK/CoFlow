@@ -466,14 +466,15 @@ export const Canvas = ({ boardId }: CanvasProps) => {
                             />
                         )}
                     <CursorsPresence />
-                    {pencilDraft != null && pencilDraft.length > 0 && (
-                        <Path
-                            points={pencilDraft}
-                            fill={colorToCss(lastUsedColor)}
-                            x={0}
-                            y={0}
-                        />
-                    )}
+                    {pencilDraft != null &&
+                        (pencilDraft as any[]).length > 0 && (
+                            <Path
+                                points={pencilDraft}
+                                fill={colorToCss(lastUsedColor)}
+                                x={0}
+                                y={0}
+                            />
+                        )}
                 </g>
             </svg>
         </main>
