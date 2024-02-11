@@ -23,4 +23,3 @@ export const useDeleteLayers = () => {
         [selection]
     );
 };
-// 8:50:12
