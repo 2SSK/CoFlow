@@ -20,6 +20,7 @@ interface ConfirmModalProps {
     description?: string;
 }
 
+// ConfirmModal component provides a modal for confirming actions
 export const ConfirmModal = ({
     children,
     onConfirm,
@@ -28,7 +29,7 @@ export const ConfirmModal = ({
     description,
 }: ConfirmModalProps) => {
     const handleConfirm = () => {
-        onConfirm();
+        onConfirm();  // Call the onConfirm function when confirmation is clicked
     };
 
     return (

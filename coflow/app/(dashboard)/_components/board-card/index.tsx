@@ -1,5 +1,6 @@
 "use client";
 
+// Importing necessary dependencies and component
 import { toast } from "sonner";
 import Link from "next/link";
 import Image from "next/image";
@@ -15,6 +16,7 @@ import { useApiMutation } from "@/hooks/use-api-mutation";
 import { Footer } from "./footer";
 import { Overlay } from "./overlay";
 
+// Interface for defining the props accepted by the BoardCard component
 interface BoardCardProps {
     id: string;
     title: string;
@@ -26,6 +28,7 @@ interface BoardCardProps {
     isFavorite: boolean;
 }
 
+// BoardCard component for rendering individual board items
 export const BoardCard = ({
     id,
     title,
@@ -36,13 +39,18 @@ export const BoardCard = ({
     orgId,
     isFavorite,
 }: BoardCardProps) => {
+    // Accessing authentication information
     const { userId } = useAuth();
 
+    // Determining the author label based on the current user
     const authorLabel = userId === authorId ? "You" : authorName;
+
+    // Formatting the creation time label
     const createdAtLabel = formatDistanceToNow(createdAt, {
         addSuffix: true,
     });
 
+    // Mutation hooks for favoriting and unfavoriting a board
     const { mutate: onFavorite, pending: pendingFavorite } = useApiMutation(
         api.board.favorite
     );
@@ -50,6 +58,7 @@ export const BoardCard = ({
         api.board.unfavorite
     );
 
+    // Function for toggling the favorite status of the board
     const toggleFavorite = () => {
         if (isFavorite) {
             onUnfavorite({ id }).catch(() =>
@@ -62,9 +71,11 @@ export const BoardCard = ({
         }
     };
 
+    // Rendering the BoardCard component
     return (
         <Link href={`/board/${id}`}>
             <div className="group aspect-[100/127] border rounded-lg flex flex-col justify-between overflow-hidden">
+                {/* Board image and actions */}
                 <div className="relative flex-1 bg-amber-50">
                     <Image
                         src={imageUrl}
@@ -79,6 +90,7 @@ export const BoardCard = ({
                         </button>
                     </Actions>
                 </div>
+                {/* Footer section containing additional details and favorite button */}
                 <Footer
                     isFavorite={isFavorite}
                     title={title}

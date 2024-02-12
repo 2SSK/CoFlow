@@ -6,14 +6,19 @@ import { X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
+// Define Dialog component from Radix UI
 const Dialog = DialogPrimitive.Root;
 
+// Define DialogTrigger component from Radix UI
 const DialogTrigger = DialogPrimitive.Trigger;
 
+// Define DialogPortal component from Radix UI
 const DialogPortal = DialogPrimitive.Portal;
 
+// Define DialogClose component from Radix UI
 const DialogClose = DialogPrimitive.Close;
 
+// Define DialogOverlay component with React.forwardRef for Overlay component from Radix UI
 const DialogOverlay = React.forwardRef<
     React.ElementRef<typeof DialogPrimitive.Overlay>,
     React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>

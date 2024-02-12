@@ -18,22 +18,27 @@ interface InfoProps {
     boardId: string;
 }
 
+// Defining Poppins font with specific subsets and weight
 const font = Poppins({
     subsets: ["latin"],
     weight: ["600"],
 });
 
+// Component for rendering a separator between tabs
 const TabSeparator = () => {
     return <div className="text-neutral-300 px-1.5">|</div>;
 };
 
+// Info component displays information about the board
 export const Info = ({ boardId }: InfoProps) => {
     const { onOpen } = useRenameModal();
 
+    // Fetching data for the board using useQuery hook
     const data = useQuery(api.board.get, {
         id: boardId as Id<"boards">,
     });
 
+    // Display skeleton while data is being fetched
     if (!data) return <InfoSkeleton />;
 
     return (
@@ -59,6 +64,7 @@ export const Info = ({ boardId }: InfoProps) => {
                 </Button>
             </Hint>
             <TabSeparator />
+            {/* Button to edit board title */}
             <Hint label="Edit title" side="bottom" sideOffset={10}>
                 <Button
                     variant="board"
@@ -69,6 +75,7 @@ export const Info = ({ boardId }: InfoProps) => {
                 </Button>
             </Hint>
             <TabSeparator />
+            {/* Actions component for additional actions */}
             <Actions
                 id={data._id}
                 title={data.title}
@@ -77,6 +84,7 @@ export const Info = ({ boardId }: InfoProps) => {
             >
                 <div>
                     <Hint label="Main menu" side="bottom" sideOffset={10}>
+                        {/* Button for main menu with Menu icon */}
                         <Button size="icon" variant="board">
                             <Menu />
                         </Button>
@@ -87,6 +95,7 @@ export const Info = ({ boardId }: InfoProps) => {
     );
 };
 
+// Skeleton component for displaying while data is being fetched
 export const InfoSkeleton = () => {
     return (
         <div className="absolute top-2 left-2 bg-white rounded-md px-1.5 h-12 flex items-center shadow-md w-[300px]" />

@@ -10,8 +10,9 @@ interface SelectionBoxProps {
     onResizeHandlePointerDown: (corner: Side, initialBounds: XYWH) => void;
 }
 
-const HANDLE_WIDTH = 8;
+const HANDLE_WIDTH = 8;  // Width of the resize handles
 
+// SelectionBox component represents the selection box with resize handles
 export const SelectionBox = memo(
     ({ onResizeHandlePointerDown }: SelectionBoxProps) => {
         const soleLayerId = useSelf((me) =>
@@ -26,6 +27,7 @@ export const SelectionBox = memo(
 
         const bounds = useSelectionBounds();
 
+        // If bounds are not available, return null
         if (!bounds) {
             return null;
         }

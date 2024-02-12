@@ -1,11 +1,14 @@
+// Importing necessary components
 import { Sidebar } from "./_components/sidebar";
 import { Navbar } from "./_components/navbar";
 import { OrgSidebar } from "./_components/org-sidebar";
 
+// Interface defining props for DashboardLayout component
 interface DashboardLayoutProps {
     children: React.ReactNode;
 }
 
+// DashboardLayout component serving as the layout for dashboard pages
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     return (
         <main className="h-full">

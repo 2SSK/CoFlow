@@ -8,6 +8,7 @@ interface EllipseProps {
     selectionColor?: string;
 }
 
+// Ellipse component to render an ellipse shape on the canvas
 export const Ellipse = ({
     id,
     layer,

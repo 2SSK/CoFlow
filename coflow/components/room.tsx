@@ -13,6 +13,7 @@ interface RoomProps {
     fallback: NonNullable<ReactNode> | null;
 }
 
+// Room component manages a LiveBlocks room and provides real-time data synchronization
 export const Room = ({ children, roomId, fallback }: RoomProps) => {
     return (
         <RoomProvider

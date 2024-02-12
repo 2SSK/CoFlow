@@ -14,6 +14,7 @@ export interface HintProps {
     alignOffset?: number;
 }
 
+// Hint component provides a tooltip hint for child elements
 export const Hint = ({
     label,
     children,
@@ -23,6 +24,7 @@ export const Hint = ({
     alignOffset,
 }: HintProps) => {
     return (
+        // Provider component for managing tooltip state
         <TooltipProvider>
             <Tooltip delayDuration={100}>
                 <TooltipTrigger asChild>{children}</TooltipTrigger>

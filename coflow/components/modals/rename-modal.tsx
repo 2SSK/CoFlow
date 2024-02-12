@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { useApiMutation } from "@/hooks/use-api-mutation";
 import { api } from "@/convex/_generated/api";
 
+// RenameModal component manages the renaming of a board
 export const RenameModal = () => {
     const { mutate, pending } = useApiMutation(api.board.update);
 
@@ -25,13 +26,16 @@ export const RenameModal = () => {
 
     const [title, setTitle] = useState(initialValues.title);
 
+    // Update the title state when initial values change
     useEffect(() => {
         setTitle(initialValues.title);
     }, [initialValues.title]);
 
+    // Function to handle form submission
     const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
 
+        // Call the API mutation to update the board title
         mutate({
             id: initialValues.id,
             title,

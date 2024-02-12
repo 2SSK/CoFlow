@@ -1,7 +1,10 @@
+// Importing necessary dependencies and components
 import Image from "next/image";
 
+// Component to render when no favorite boards are found
 export const EmptyFavorites = () => {
     return (
+        // Container for the empty favorites message
         <div className="h-full flex flex-col items-center justify-center">
             <Image
                 src="/empty-favorites.svg"

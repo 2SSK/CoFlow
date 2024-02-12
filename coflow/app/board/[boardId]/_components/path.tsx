@@ -11,6 +11,7 @@ interface PathProps {
     stroke?: string;
 }
 
+// Path component renders a path based on the given points
 export const Path = ({
     x,
     y,

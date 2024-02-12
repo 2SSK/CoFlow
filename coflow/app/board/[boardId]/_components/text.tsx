@@ -5,11 +5,13 @@ import { TextLayer } from "@/types/canvas";
 import { cn, colorToCss } from "@/lib/utils";
 import { useMutation } from "@/liveblocks.config";
 
+// Define Kalam font settings
 const font = Kalam({
     subsets: ["latin"],
     weight: ["400"],
 });
 
+// Function to calculate font size based on width and height
 const calculateFontSize = (width: number, height: number) => {
     const maxFontSize = 96;
     const scaleFactor = 0.5;
@@ -26,6 +28,7 @@ interface TextProps {
     selectionColor?: string;
 }
 
+// Text component represents a text layer on the canvas
 export const Text = ({
     layer,
     onPointerDown,
@@ -34,12 +37,14 @@ export const Text = ({
 }: TextProps) => {
     const { x, y, width, height, fill, value } = layer;
 
+    // Mutation hook for updating text value
     const updateValue = useMutation(({ storage }, newValue: string) => {
         const liveLayers = storage.get("layers");
 
         liveLayers.get(id)?.set("value", newValue);
     }, []);
 
+    // Event handler for content change
     const handleContentChange = (e: ContentEditableEvent) => {
         updateValue(e.target.value);
     };

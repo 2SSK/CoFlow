@@ -1,5 +1,6 @@
 "use client";
 
+// Importing necessary dependencies and components
 import {
     UserButton,
     OrganizationSwitcher,
@@ -9,15 +10,19 @@ import {
 import { SearchInput } from "./search-input";
 import { InviteButton } from "./invite-button";
 
+// Component for rendering the navbar
 export const Navbar = () => {
+    // Accessing organization information using the useOrganization hook
     const { organization } = useOrganization();
 
     return (
+        // Container for the navbar
         <div className="flex items-center gap-x-4 p-5">
             <div className="hidden lg:flex lg:flex-1">
                 <SearchInput />
             </div>
             <div className="block lg:hidden flex-1">
+                {/* Organization switcher, visible on small screens */}
                 <OrganizationSwitcher
                     hidePersonal
                     appearance={{
@@ -41,7 +46,9 @@ export const Navbar = () => {
                     }}
                 />
             </div>
+            {/* Invite button, visible if organization is present */}
             {organization && <InviteButton />}
+            {/* Button for user-related actions */}
             <UserButton />
         </div>
     );

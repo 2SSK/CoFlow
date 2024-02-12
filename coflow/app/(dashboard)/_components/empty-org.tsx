@@ -1,11 +1,14 @@
+// Importing necessary dependencies and components
 import Image from "next/image";
 import { CreateOrganization } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
+// Component to render when no organization is found
 export const EmptyOrg = () => {
     return (
+        // Container for the empty organization message
         <div className="h-full flex flex-col items-center justify-center">
             <Image src="/elements.svg" alt="Empty" height={200} width={200} />
             <h2 className="text-2xl font-semibold mt-6">Welcome to CoFlow</h2>

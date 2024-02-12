@@ -12,20 +12,25 @@ import { Rectangle } from "./rectangle";
 import { Note } from "./note";
 import { Path } from "./path";
 
+// Interface for props passed to LayerPreview component
 interface LayerPreviewProps {
     id: string;
     onLayerPointerDown: (e: React.PointerEvent, layerId: string) => void;
     selectionColor?: string;
 }
 
+// LayerPreview component displays a preview of a layer based on its type
 export const LayerPreview = memo(
     ({ id, onLayerPointerDown, selectionColor }: LayerPreviewProps) => {
+        // Fetching layer data from storage using useStorage hook
         const layer = useStorage((root) => root.layers.get(id));
 
+        // If layer data is not available, return null
         if (!layer) {
             return null;
         }
 
+        // Rendering different layer components based on layer type
         switch (layer.type) {
             case LayerType.Path:
                 return (

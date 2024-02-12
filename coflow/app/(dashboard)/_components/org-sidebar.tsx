@@ -1,5 +1,6 @@
 "use client";
 
+// Importing necessary dependencies and components
 import Link from "next/link";
 import Image from "next/image";
 import { Poppins } from "next/font/google";
@@ -10,17 +11,22 @@ import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
+// Defining Poppins font with specified subsets and weight
 const font = Poppins({
     subsets: ["latin"],
     weight: ["600"],
 });
 
+// Component for rendering the organization sidebar
 export const OrgSidebar = () => {
+    // Getting search parameters for filtering favorite boards
     const searchParams = useSearchParams();
     const favorites = searchParams.get("favorites");
 
+    // Rendering the organization sidebar
     return (
         <div className="hidden lg:flex flex-col space-y-6 w-[206px] pl-5 pt-5">
+            {/* Link to the homepage */}
             <Link href="/">
                 <div className="flex items-center gap-x-2">
                     <Image src="/logo.svg" alt="Logo" height={60} width={60} />
@@ -52,6 +58,7 @@ export const OrgSidebar = () => {
                     },
                 }}
             />
+            {/* Navigation buttons */}
             <div className="space-y-1 w-full">
                 <Button
                     variant={favorites ? "ghost" : "secondary"}

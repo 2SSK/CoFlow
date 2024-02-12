@@ -8,6 +8,7 @@ interface RectangleProps {
     selectionColor?: string;
 }
 
+// Rectangle component renders a rectangle shape
 export const Rectangle = ({
     id,
     layer,

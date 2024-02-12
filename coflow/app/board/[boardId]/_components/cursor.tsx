@@ -6,21 +6,24 @@ import { MousePointer2 } from "lucide-react";
 import { useOther } from "@/liveblocks.config";
 import { connectionIdToColor } from "@/lib/utils";
 
+// Props interface for Cursor component
 interface CursorProps {
     connectionId: number;
 }
 
+// Cursor component to display teammate cursors on the canvas
 export const Cursor = memo(({ connectionId }: CursorProps) => {
     const info = useOther(connectionId, (user) => user?.info);
     const cursor = useOther(connectionId, (user) => user.presence.cursor);
 
     const name = info?.name || "Teammate";
 
+    // If cursor position is not available, return null
     if (!cursor) {
         return null;
     }
 
-    const { x, y } = cursor;
+    const { x, y } = cursor;  // Extracting cursor coordinates
 
     return (
         <foreignObject

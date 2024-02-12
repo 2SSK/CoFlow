@@ -5,8 +5,9 @@ import { useOthers, useSelf } from "@/liveblocks.config";
 
 import { UserAvatar } from "./user-avatar";
 
-const MAX_SHOWN_USERS = 2;
+const MAX_SHOWN_USERS = 2; // Maximum number of users to display
 
+// Participants component displays avatars of other participants in the collaboration session
 export const Participants = () => {
     const users = useOthers();
     const currentUser = useSelf();
@@ -29,6 +30,7 @@ export const Participants = () => {
                         );
                     })}
 
+                {/* Render avatar for the current user */}
                 {currentUser && (
                     <UserAvatar
                         borderColor={connectionIdToColor(
@@ -40,6 +42,7 @@ export const Participants = () => {
                     />
                 )}
 
+                {/* Render avatar for more users if available */}
                 {hasMoreUsers && (
                     <UserAvatar
                         name={`${users.length - MAX_SHOWN_USERS} more`}
@@ -51,6 +54,7 @@ export const Participants = () => {
     );
 };
 
+// ParticipantsSkeleton component renders a skeleton view of the Participants component
 export const ParticipantsSkeleton = () => {
     return (
         <div className="absolute h-12 top-2 right-2 bg-white rounded-md p-3 flex items-center shadow-md w-[100px]" />

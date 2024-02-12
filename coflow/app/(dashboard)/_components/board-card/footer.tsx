@@ -1,7 +1,9 @@
+// Importing necessary dependencies and components
 import { Star } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
+// Interface for defining the props accepted by the Footer component
 interface FooterProps {
     title: string;
     authorLabel: string;
@@ -11,6 +13,7 @@ interface FooterProps {
     disabled: boolean;
 }
 
+// Footer component for rendering additional details and favorite button for an item
 export const Footer = ({
     title,
     authorLabel,
@@ -20,6 +23,7 @@ export const Footer = ({
     disabled,
 }: FooterProps) => {
     const handleClick = (
+        // Event handler for clicking the favorite button
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
         event.stopPropagation();
@@ -28,6 +32,7 @@ export const Footer = ({
         onClick();
     };
 
+    // Rendering the Footer component
     return (
         <div className="relative bg-white p-3">
             <p className="text-[13px] truncate max-w-[calc(100%-20px)]">
@@ -44,6 +49,7 @@ export const Footer = ({
                     disabled && "cursor-not-allowed opacity-75"
                 )}
             >
+                {/* Star icon for indicating favorite status */}
                 <Star
                     className={cn(
                         "h-4 w-4",

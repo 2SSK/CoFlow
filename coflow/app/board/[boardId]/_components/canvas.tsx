@@ -4,6 +4,7 @@ import { nanoid } from "nanoid";
 import { useCallback, useMemo, useState, useEffect } from "react";
 import { LiveObject } from "@liveblocks/client";
 
+// Importing various hooks and utilities from project configurations and custom hooks
 import {
     useHistory,
     useCanUndo,
@@ -34,6 +35,7 @@ import {
 import { useDisableScrollBounce } from "@/hooks/use-disable-scroll-bounce";
 import { useDeleteLayers } from "@/hooks/use-delete-layers";
 
+// Importing components and utilities related to the canvas
 import { Info } from "./info";
 import { Path } from "./path";
 import { Toolbar } from "./toolbar";
@@ -43,13 +45,16 @@ import { SelectionBox } from "./selection-box";
 import { SelectionTools } from "./selection-tools";
 import { CursorsPresence } from "./cursors-presence";
 
+// Maximum number of layers allowed on the canvas
 const MAX_LAYERS = 100;
 
 interface CanvasProps {
-    boardId: string;
+    boardId: string;  // Props for specifying the board ID
 }
 
+// Canvas component responsible for rendering and managing the canvas state
 export const Canvas = ({ boardId }: CanvasProps) => {
+    // Custom hooks for accessing storage, presence, history, etc.
     const layerIds = useStorage((root) => root.layerIds);
 
     const pencilDraft = useSelf((me) => me.presence.pencilDraft);
@@ -63,12 +68,15 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         b: 0,
     });
 
+    // Custom hook to disable scroll bounce
     useDisableScrollBounce();
     const history = useHistory();
     const canUndo = useCanUndo();
     const canRedo = useCanRedo();
 
+    // Custom mutations for various actions on the canvas
     const insertLayer = useMutation(
+        // Mutation for inserting a new layer on the canvas
         (
             { storage, setMyPresence },
             layerType:
@@ -78,13 +86,14 @@ export const Canvas = ({ boardId }: CanvasProps) => {
                 | LayerType.Note,
             position: Point
         ) => {
+            // Check if maximum layers limit has been reached
             const liveLayers = storage.get("layers");
             if (liveLayers.size >= MAX_LAYERS) {
                 return;
             }
 
             const liveLayerIds = storage.get("layerIds");
-            const layerId = nanoid();
+            const layerId = nanoid();  // Generate unique ID for the new layer
             const layer = new LiveObject({
                 type: layerType,
                 x: position.x,
@@ -97,6 +106,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
             liveLayerIds.push(layerId);
             liveLayers.set(layerId, layer);
 
+            // Set presence and update canvas state
             setMyPresence({ selection: [layerId] }, { addToHistory: true });
             setCanvasState({ mode: CanvasMode.None });
         },

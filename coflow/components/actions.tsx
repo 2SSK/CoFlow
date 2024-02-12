@@ -25,6 +25,7 @@ interface ActionsProps {
     title: string;
 }
 
+//Actions component provides a dropdown menu with various actions for a board
 export const Actions = ({
     children,
     side,
@@ -35,6 +36,7 @@ export const Actions = ({
     const { onOpen } = useRenameModal();
     const { mutate, pending } = useApiMutation(api.board.remove);
 
+    // Function to copy the board link to the clipboard
     const onCopyLink = () => {
         navigator.clipboard
             .writeText(`${window.location.origin}/board/${id}`)
@@ -42,6 +44,7 @@ export const Actions = ({
             .catch(() => toast.error("Failed to copy link"));
     };
 
+    // Function to handle board deletion
     const onDelete = () => {
         mutate({ id })
             .then(() => toast.success("Board deleted"))
@@ -57,6 +60,7 @@ export const Actions = ({
                 sideOffset={sideOffset}
                 className="w-60"
             >
+                {/* Menu items for different actions */}
                 <DropdownMenuItem
                     onClick={onCopyLink}
                     className="p-3 cursor-pointer"
@@ -71,12 +75,14 @@ export const Actions = ({
                     <Pencil className="h-4 w-4 mr-2" />
                     Rename
                 </DropdownMenuItem>
+                {/* Confirmation modal for board deletion */}
                 <ConfirmModal
                     header="Delete board?"
                     description="This will delete the board and all of its contents."
                     disabled={pending}
                     onConfirm={onDelete}
                 >
+                    {/* Button to trigger the deletion */}
                     <Button
                         variant="ghost"
                         className="p-3 cursor-pointer text-sm w-full justify-start font-normal"

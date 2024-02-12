@@ -8,6 +8,7 @@ interface UserAvatarProps {
     borderColor?: string;
 }
 
+// UserAvatar component represents a user's avatar with tooltip functionality
 export const UserAvatar = ({
     src,
     name,

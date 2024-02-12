@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+// Loading component displays a loading animation while content is being loaded
 export const Loading = () => {
     return (
         <div className="h-full w-full flex flex-col justify-center items-center">

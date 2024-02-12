@@ -4,9 +4,11 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
+// Define buttonVariants using class-variance-authority
 const buttonVariants = cva(
     "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
     {
+        // Variants for different button styles
         variants: {
             variant: {
                 default:
@@ -22,6 +24,7 @@ const buttonVariants = cva(
                 board: "hover:bg-blue-500/20 hover:text-blue-800",
                 boardActive: "bg-blue-500/20 text-blue-800",
             },
+            // Sizes for buttons
             size: {
                 default: "h-10 px-4 py-2",
                 sm: "h-9 rounded-md px-3",
@@ -29,6 +32,7 @@ const buttonVariants = cva(
                 icon: "h-10 w-10",
             },
         },
+        // Default variants for buttons
         defaultVariants: {
             variant: "default",
             size: "default",
@@ -36,12 +40,14 @@ const buttonVariants = cva(
     }
 );
 
+// Define ButtonProps interface with button attributes and variant props
 export interface ButtonProps
     extends React.ButtonHTMLAttributes<HTMLButtonElement>,
         VariantProps<typeof buttonVariants> {
     asChild?: boolean;
 }
 
+// Custom Button component
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ({ className, variant, size, asChild = false, ...props }, ref) => {
         const Comp = asChild ? Slot : "button";
@@ -56,4 +62,5 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 Button.displayName = "Button";
 
+// Export Button component and buttonVariants
 export { Button, buttonVariants };

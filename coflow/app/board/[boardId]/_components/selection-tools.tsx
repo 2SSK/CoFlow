@@ -17,12 +17,14 @@ interface SelectionToolsProps {
     setLastUsedColor: (color: Color) => void;
 }
 
+// SelectionTools component represents the tools available for selected layers
 export const SelectionTools = memo(
     ({ camera, setLastUsedColor }: SelectionToolsProps) => {
         const selection = useSelf((me) => me.presence.selection);
 
         const moveToFront = useMutation(
             ({ storage }) => {
+                // Callback function to execute mutation
                 const liveLayerIds = storage.get("layerIds");
                 const indices: number[] = [];
 
@@ -30,7 +32,7 @@ export const SelectionTools = memo(
 
                 for (let i = 0; i < arr.length; i++) {
                     if (selection.includes(arr[i])) {
-                        indices.push(i);
+                        indices.push(i);  // Add index of selected layer to The array
                     }
                 }
 
@@ -38,7 +40,7 @@ export const SelectionTools = memo(
                     liveLayerIds.move(
                         indices[i],
                         arr.length - 1 - (indices.length - 1 - i)
-                    );
+                    );  // Move selected layers to the front
                 }
             },
             [selection]

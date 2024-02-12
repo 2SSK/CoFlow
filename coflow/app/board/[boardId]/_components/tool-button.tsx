@@ -13,6 +13,7 @@ interface ToolButtonProps {
     isDisabled?: boolean;
 }
 
+// ToolButton component represents a button with an icon and optional label
 export const ToolButton = ({
     label,
     icon: Icon,
@@ -28,6 +29,7 @@ export const ToolButton = ({
                 size="icon"
                 variant={isActive ? "boardActive" : "board"}
             >
+                {/* Render the provided icon */}
                 <Icon />
             </Button>
         </Hint>

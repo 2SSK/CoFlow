@@ -5,11 +5,13 @@ import { NoteLayer } from "@/types/canvas";
 import { cn, colorToCss, getContrastingTextColor } from "@/lib/utils";
 import { useMutation } from "@/liveblocks.config";
 
+// Defining font configuration
 const font = Kalam({
     subsets: ["latin"],
     weight: ["400"],
 });
 
+// Function to calculate the font size based on the width and height of the note
 const calculateFontSize = (width: number, height: number) => {
     const maxFontSize = 96;
     const scaleFactor = 0.15;
@@ -26,6 +28,7 @@ interface NoteProps {
     selectionColor?: string;
 }
 
+// Note component renders a note layer with editable content
 export const Note = ({
     layer,
     onPointerDown,
@@ -34,12 +37,14 @@ export const Note = ({
 }: NoteProps) => {
     const { x, y, width, height, fill, value } = layer;
 
+    // Mutation hook to update the value of the note
     const updateValue = useMutation(({ storage }, newValue: string) => {
         const liveLayers = storage.get("layers");
 
         liveLayers.get(id)?.set("value", newValue);
     }, []);
 
+    // Handler function for content change in the note
     const handleContentChange = (e: ContentEditableEvent) => {
         updateValue(e.target.value);
     };
@@ -59,6 +64,7 @@ export const Note = ({
             }}
             className="shadow-md drop-shadow-xl"
         >
+            {/* ContentEditable component for editable content */}
             <ContentEditable
                 html={value || "Text"}
                 onChange={handleContentChange}
