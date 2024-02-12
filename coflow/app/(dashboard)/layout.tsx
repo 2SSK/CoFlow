@@ -1,12 +1,12 @@
 import { Sidebar } from "./_components/sidebar";
-import { OrgSidebar } from "./_components/org-sidebar";
 import { Navbar } from "./_components/navbar";
+import { OrgSidebar } from "./_components/org-sidebar";
 
-interface DashbordLayoutProps {
+interface DashboardLayoutProps {
     children: React.ReactNode;
 }
 
-const DashbordLayout = ({ children }: DashbordLayoutProps) => {
+const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     return (
         <main className="h-full">
             <Sidebar />
@@ -23,4 +23,4 @@ const DashbordLayout = ({ children }: DashbordLayoutProps) => {
     );
 };
 
-export default DashbordLayout;
+export default DashboardLayout;

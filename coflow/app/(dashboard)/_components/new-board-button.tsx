@@ -20,7 +20,7 @@ export const NewBoardButton = ({ orgId, disabled }: NewBoardButtonProps) => {
     const onClick = () => {
         mutate({
             orgId,
-            title: "untitled",
+            title: "Untitled",
         })
             .then((id) => {
                 toast.success("Board created");
@@ -41,7 +41,7 @@ export const NewBoardButton = ({ orgId, disabled }: NewBoardButtonProps) => {
         >
             <div />
             <Plus className="h-12 w-12 text-white stroke-1" />
-            <p className="text-sm text-white font-light">New Board</p>
+            <p className="text-sm text-white font-light">New board</p>
         </button>
     );
 };

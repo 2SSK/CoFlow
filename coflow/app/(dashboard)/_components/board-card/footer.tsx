@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+
 import { cn } from "@/lib/utils";
 
 interface FooterProps {
@@ -39,7 +40,7 @@ export const Footer = ({
                 disabled={disabled}
                 onClick={handleClick}
                 className={cn(
-                    "opacity-0 group-hover:opacity-100 transition-opacity absolute top-3 right-3 text-muted-foreground hover:text-blue-600",
+                    "opacity-0 group-hover:opacity-100 transition absolute top-3 right-3 text-muted-foreground hover:text-blue-600",
                     disabled && "cursor-not-allowed opacity-75"
                 )}
             >

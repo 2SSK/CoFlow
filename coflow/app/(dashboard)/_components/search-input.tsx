@@ -1,10 +1,11 @@
 "use client";
 
-import queryString from "query-string";
+import qs from "query-string";
 import { Search } from "lucide-react";
 import { useDebounce } from "usehooks-ts";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
+
 import { Input } from "@/components/ui/input";
 
 export const SearchInput = () => {
@@ -17,7 +18,7 @@ export const SearchInput = () => {
     };
 
     useEffect(() => {
-        const url = queryString.stringifyUrl(
+        const url = qs.stringifyUrl(
             {
                 url: "/",
                 query: {

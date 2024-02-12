@@ -1,6 +1,7 @@
 "use client";
 
 import { useOrganizationList } from "@clerk/nextjs";
+
 import { Item } from "./item";
 
 export const List = () => {
@@ -9,6 +10,7 @@ export const List = () => {
             infinite: true,
         },
     });
+
     if (!userMemberships.data?.length) return null;
 
     return (

@@ -4,14 +4,14 @@ import { RectangleLayer } from "@/types/canvas";
 interface RectangleProps {
     id: string;
     layer: RectangleLayer;
-    onPointDown: (e: React.PointerEvent, layerId: string) => void;
+    onPointerDown: (e: React.PointerEvent, id: string) => void;
     selectionColor?: string;
 }
 
 export const Rectangle = ({
     id,
     layer,
-    onPointDown,
+    onPointerDown,
     selectionColor,
 }: RectangleProps) => {
     const { x, y, width, height, fill } = layer;
@@ -19,7 +19,7 @@ export const Rectangle = ({
     return (
         <rect
             className="drop-shadow-md"
-            onPointerDown={(e) => onPointDown(e, id)}
+            onPointerDown={(e) => onPointerDown(e, id)}
             style={{
                 transform: `translate(${x}px, ${y}px)`,
             }}

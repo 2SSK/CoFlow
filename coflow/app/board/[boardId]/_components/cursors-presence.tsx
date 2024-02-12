@@ -6,8 +6,8 @@ import { shallow } from "@liveblocks/client";
 import { useOthersConnectionIds, useOthersMapped } from "@/liveblocks.config";
 import { colorToCss } from "@/lib/utils";
 
-import { Path } from "./path";
 import { Cursor } from "./cursor";
+import { Path } from "./path";
 
 const Cursors = () => {
     const ids = useOthersConnectionIds();
@@ -32,7 +32,7 @@ const Drafts = () => {
 
     return (
         <>
-            {others.map((key, other) => {
+            {others.map(([key, other]) => {
                 if (other.pencilDraft) {
                     return (
                         <Path
@@ -48,6 +48,8 @@ const Drafts = () => {
                         />
                     );
                 }
+
+                return null;
             })}
         </>
     );

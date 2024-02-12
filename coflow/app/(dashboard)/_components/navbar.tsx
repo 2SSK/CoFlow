@@ -1,8 +1,8 @@
 "use client";
 
 import {
-    OrganizationSwitcher,
     UserButton,
+    OrganizationSwitcher,
     useOrganization,
 } from "@clerk/nextjs";
 
@@ -14,7 +14,7 @@ export const Navbar = () => {
 
     return (
         <div className="flex items-center gap-x-4 p-5">
-            <div className="hidden lg:flex lg:flex-1 ">
+            <div className="hidden lg:flex lg:flex-1">
                 <SearchInput />
             </div>
             <div className="block lg:hidden flex-1">
@@ -33,7 +33,7 @@ export const Navbar = () => {
                                 padding: "6px",
                                 width: "100%",
                                 borderRadius: "8px",
-                                border: "1px solid #e5e7eb",
+                                border: "1px solid #E5E7EB",
                                 justifyContent: "space-between",
                                 backgroundColor: "white",
                             },

@@ -23,10 +23,10 @@ export const SelectionTools = memo(
 
         const moveToFront = useMutation(
             ({ storage }) => {
-                const liveLayerIds = storage.get("layersIds");
+                const liveLayerIds = storage.get("layerIds");
                 const indices: number[] = [];
 
-                const arr = liveLayerIds.toArray();
+                const arr = liveLayerIds.toImmutable();
 
                 for (let i = 0; i < arr.length; i++) {
                     if (selection.includes(arr[i])) {
@@ -46,10 +46,10 @@ export const SelectionTools = memo(
 
         const moveToBack = useMutation(
             ({ storage }) => {
-                const liveLayerIds = storage.get("layersIds");
+                const liveLayerIds = storage.get("layerIds");
                 const indices: number[] = [];
 
-                const arr = liveLayerIds.toArray();
+                const arr = liveLayerIds.toImmutable();
 
                 for (let i = 0; i < arr.length; i++) {
                     if (selection.includes(arr[i])) {
@@ -92,9 +92,9 @@ export const SelectionTools = memo(
                 className="absolute p-3 rounded-xl bg-white shadow-sm border flex select-none"
                 style={{
                     transform: `translate(
-                        calc(${x}px -50%)
-                        calc(${y - 16}px - 100%)
-                        )`,
+          calc(${x}px - 50%),
+          calc(${y - 16}px - 100%)
+        )`,
                 }}
             >
                 <ColorPicker onChange={setFill} />
@@ -108,7 +108,6 @@ export const SelectionTools = memo(
                             <BringToFront />
                         </Button>
                     </Hint>
-
                     <Hint label="Send to back" side="bottom">
                         <Button
                             onClick={moveToBack}

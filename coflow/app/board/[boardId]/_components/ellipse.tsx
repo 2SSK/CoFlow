@@ -20,9 +20,9 @@ export const Ellipse = ({
             onPointerDown={(e) => onPointerDown(e, id)}
             style={{
                 transform: `translate(
-                                ${layer.x}px,
-                                ${layer.y}px
-                            )`,
+                    ${layer.x}px,
+                    ${layer.y}px
+                )`,
             }}
             cx={layer.width / 2}
             cy={layer.height / 2}

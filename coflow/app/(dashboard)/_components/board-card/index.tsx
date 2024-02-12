@@ -1,6 +1,6 @@
 "use client";
 
-// Importing necessary libraries and components
+import { toast } from "sonner";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from "@clerk/nextjs";
@@ -14,9 +14,7 @@ import { useApiMutation } from "@/hooks/use-api-mutation";
 
 import { Footer } from "./footer";
 import { Overlay } from "./overlay";
-import { toast } from "sonner";
 
-// Interface for the props of the BoardCard component
 interface BoardCardProps {
     id: string;
     title: string;
@@ -28,18 +26,16 @@ interface BoardCardProps {
     isFavorite: boolean;
 }
 
-// BoardCard component
 export const BoardCard = ({
     id,
     title,
-    authorName,
     authorId,
+    authorName,
     createdAt,
     imageUrl,
     orgId,
     isFavorite,
 }: BoardCardProps) => {
-    // Using th useAuth hook to get the current user's ID
     const { userId } = useAuth();
 
     const authorLabel = userId === authorId ? "You" : authorName;

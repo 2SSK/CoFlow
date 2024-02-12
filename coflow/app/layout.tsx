@@ -1,23 +1,21 @@
-// Importing necessary dependencies and styles
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Suspense } from "react";
 
 import { Toaster } from "@/components/ui/sonner";
 import { ConvexClientProvider } from "@/providers/convex-client-provider";
 import { ModalProvider } from "@/providers/modal-provider";
+import { Loading } from "@/components/auth/loading";
 
-// Creating an instance of the Inter font with the Latin subset
 const inter = Inter({ subsets: ["latin"] });
 
-// Metadata for the page
 export const metadata: Metadata = {
     title: "CoFlow",
     description:
         "coFlow is a collaborative platform designed for efficient team collaboration, brainstorming, and project planning. It provides a virtual canvas for teams to ideate and innovate in real-time.",
 };
 
-// RootLayout component to provide a consistent layout for the entire application
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -26,12 +24,13 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={inter.className}>
-                {/* Wrapping the application with ConvexClientProvider for authentication and Convex context */}
-                <ConvexClientProvider>
-                    <Toaster />
-                    <ModalProvider />
-                    {children}
-                </ConvexClientProvider>
+                <Suspense fallback={<Loading />}>
+                    <ConvexClientProvider>
+                        <Toaster />
+                        <ModalProvider />
+                        {children}
+                    </ConvexClientProvider>
+                </Suspense>
             </body>
         </html>
     );

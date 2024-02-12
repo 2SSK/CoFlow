@@ -23,8 +23,8 @@ const font = Poppins({
     weight: ["600"],
 });
 
-export const TabSeparator = () => {
-    return <div className="text-neutral-300 px-1.5"></div>;
+const TabSeparator = () => {
+    return <div className="text-neutral-300 px-1.5">|</div>;
 };
 
 export const Info = ({ boardId }: InfoProps) => {
@@ -53,7 +53,7 @@ export const Info = ({ boardId }: InfoProps) => {
                                 font.className
                             )}
                         >
-                            CoFlow
+                            Board
                         </span>
                     </Link>
                 </Button>
@@ -63,9 +63,7 @@ export const Info = ({ boardId }: InfoProps) => {
                 <Button
                     variant="board"
                     className="text-base font-normal px-2"
-                    onClick={() => {
-                        onOpen(data._id, data.title);
-                    }}
+                    onClick={() => onOpen(data._id, data.title)}
                 >
                     {data.title}
                 </Button>

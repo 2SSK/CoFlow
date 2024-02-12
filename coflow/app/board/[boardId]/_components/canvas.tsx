@@ -1,7 +1,7 @@
 "use client";
 
 import { nanoid } from "nanoid";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, useEffect } from "react";
 import { LiveObject } from "@liveblocks/client";
 
 import {
@@ -31,9 +31,11 @@ import {
     Side,
     XYWH,
 } from "@/types/canvas";
+import { useDisableScrollBounce } from "@/hooks/use-disable-scroll-bounce";
+import { useDeleteLayers } from "@/hooks/use-delete-layers";
 
-import { Path } from "./path";
 import { Info } from "./info";
+import { Path } from "./path";
 import { Toolbar } from "./toolbar";
 import { Participants } from "./participants";
 import { LayerPreview } from "./layer-preview";
@@ -48,16 +50,12 @@ interface CanvasProps {
 }
 
 export const Canvas = ({ boardId }: CanvasProps) => {
-    const layerIds = useStorage((root) => root.layersIds);
+    const layerIds = useStorage((root) => root.layerIds);
 
-    const pencilDraft = useSelf((me) => {
-        me.presence.pencilDraft;
-    });
-
+    const pencilDraft = useSelf((me) => me.presence.pencilDraft);
     const [canvasState, setCanvasState] = useState<CanvasState>({
         mode: CanvasMode.None,
     });
-
     const [camera, setCamera] = useState<Camera>({ x: 0, y: 0 });
     const [lastUsedColor, setLastUsedColor] = useState<Color>({
         r: 0,
@@ -65,6 +63,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         b: 0,
     });
 
+    useDisableScrollBounce();
     const history = useHistory();
     const canUndo = useCanUndo();
     const canRedo = useCanRedo();
@@ -75,17 +74,16 @@ export const Canvas = ({ boardId }: CanvasProps) => {
             layerType:
                 | LayerType.Ellipse
                 | LayerType.Rectangle
-                | LayerType.Note
-                | LayerType.Text,
+                | LayerType.Text
+                | LayerType.Note,
             position: Point
         ) => {
             const liveLayers = storage.get("layers");
-
             if (liveLayers.size >= MAX_LAYERS) {
                 return;
             }
 
-            const liveLayerIds = storage.get("layersIds");
+            const liveLayerIds = storage.get("layerIds");
             const layerId = nanoid();
             const layer = new LiveObject({
                 type: layerType,
@@ -105,7 +103,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         [lastUsedColor]
     );
 
-    const translateSelectedLayer = useMutation(
+    const translateSelectedLayers = useMutation(
         ({ storage, self }, point: Point) => {
             if (canvasState.mode !== CanvasMode.Translating) {
                 return;
@@ -219,7 +217,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
                 new LiveObject(penPointsToPathLayer(pencilDraft, lastUsedColor))
             );
 
-            const liveLayerIds = storage.get("layersIds");
+            const liveLayerIds = storage.get("layerIds");
             liveLayerIds.push(id);
 
             setMyPresence({ pencilDraft: null });
@@ -290,7 +288,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
             } else if (canvasState.mode === CanvasMode.SelectionNet) {
                 updateSelectionNet(current, canvasState.origin);
             } else if (canvasState.mode === CanvasMode.Translating) {
-                translateSelectedLayer(current);
+                translateSelectedLayers(current);
             } else if (canvasState.mode === CanvasMode.Resizing) {
                 resizeSelectedLayer(current);
             } else if (canvasState.mode === CanvasMode.Pencil) {
@@ -303,10 +301,10 @@ export const Canvas = ({ boardId }: CanvasProps) => {
             continueDrawing,
             camera,
             canvasState,
-            updateSelectionNet,
             resizeSelectedLayer,
+            translateSelectedLayers,
             startMultiSelection,
-            translateSelectedLayer,
+            updateSelectionNet,
         ]
     );
 
@@ -341,7 +339,6 @@ export const Canvas = ({ boardId }: CanvasProps) => {
                 canvasState.mode === CanvasMode.Pressing
             ) {
                 unselectLayers();
-
                 setCanvasState({
                     mode: CanvasMode.None,
                 });
@@ -350,19 +347,21 @@ export const Canvas = ({ boardId }: CanvasProps) => {
             } else if (canvasState.mode === CanvasMode.Inserting) {
                 insertLayer(canvasState.layerType, point);
             } else {
-                setCanvasState({ mode: CanvasMode.None });
+                setCanvasState({
+                    mode: CanvasMode.None,
+                });
             }
 
             history.resume();
         },
         [
-            camera,
-            history,
-            insertPath,
-            insertLayer,
-            canvasState,
-            unselectLayers,
             setCanvasState,
+            camera,
+            canvasState,
+            history,
+            insertLayer,
+            unselectLayers,
+            insertPath,
         ]
     );
 
@@ -405,6 +404,34 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         return layerIdsToColorSelection;
     }, [selections]);
 
+    const deleteLayers = useDeleteLayers();
+
+    useEffect(() => {
+        function onKeyDown(e: KeyboardEvent) {
+            switch (e.key) {
+                // case "Backspace":
+                //   deleteLayers();
+                //   break;
+                case "z": {
+                    if (e.ctrlKey || e.metaKey) {
+                        if (e.shiftKey) {
+                            history.redo();
+                        } else {
+                            history.undo();
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        document.addEventListener("keydown", onKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", onKeyDown);
+        };
+    }, [deleteLayers, history]);
+
     return (
         <main className="h-full w-full relative bg-neutral-100 touch-none">
             <Info boardId={boardId} />
@@ -412,8 +439,8 @@ export const Canvas = ({ boardId }: CanvasProps) => {
             <Toolbar
                 canvasState={canvasState}
                 setCanvasState={setCanvasState}
-                canUndo={canUndo}
                 canRedo={canRedo}
+                canUndo={canUndo}
                 undo={history.undo}
                 redo={history.redo}
             />
@@ -448,7 +475,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
                     {canvasState.mode === CanvasMode.SelectionNet &&
                         canvasState.current != null && (
                             <rect
-                                className="fill-blue-500/5 stroke-blue-500 stroke-1 "
+                                className="fill-blue-500/5 stroke-blue-500 stroke-1"
                                 x={Math.min(
                                     canvasState.origin.x,
                                     canvasState.current.x
@@ -466,15 +493,14 @@ export const Canvas = ({ boardId }: CanvasProps) => {
                             />
                         )}
                     <CursorsPresence />
-                    {pencilDraft != null &&
-                        (pencilDraft as any[]).length > 0 && (
-                            <Path
-                                points={pencilDraft}
-                                fill={colorToCss(lastUsedColor)}
-                                x={0}
-                                y={0}
-                            />
-                        )}
+                    {pencilDraft != null && pencilDraft.length > 0 && (
+                        <Path
+                            points={pencilDraft}
+                            fill={colorToCss(lastUsedColor)}
+                            x={0}
+                            y={0}
+                        />
+                    )}
                 </g>
             </svg>
         </main>

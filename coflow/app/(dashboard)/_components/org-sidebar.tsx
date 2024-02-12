@@ -1,7 +1,5 @@
 "use client";
 
-import React from "react";
-
 import Link from "next/link";
 import Image from "next/image";
 import { Poppins } from "next/font/google";
@@ -17,12 +15,12 @@ const font = Poppins({
     weight: ["600"],
 });
 
-export const OrgSidebar: React.FC = () => {
+export const OrgSidebar = () => {
     const searchParams = useSearchParams();
     const favorites = searchParams.get("favorites");
 
     return (
-        <div className="hidden lg:flex flex-col space-y-6 w-[206px] pl-5 pr-2 pt-5">
+        <div className="hidden lg:flex flex-col space-y-6 w-[206px] pl-5 pt-5">
             <Link href="/">
                 <div className="flex items-center gap-x-2">
                     <Image src="/logo.svg" alt="Logo" height={60} width={60} />
@@ -47,7 +45,7 @@ export const OrgSidebar: React.FC = () => {
                             padding: "6px",
                             width: "100%",
                             borderRadius: "8px",
-                            border: "1px solid #e5e7eb",
+                            border: "1px solid #E5E7EB",
                             justifyContent: "space-between",
                             backgroundColor: "white",
                         },
@@ -66,7 +64,6 @@ export const OrgSidebar: React.FC = () => {
                         Team boards
                     </Link>
                 </Button>
-                {/*  */}
                 <Button
                     variant={favorites ? "secondary" : "ghost"}
                     asChild
@@ -76,9 +73,7 @@ export const OrgSidebar: React.FC = () => {
                     <Link
                         href={{
                             pathname: "/",
-                            query: {
-                                favorites: true,
-                            },
+                            query: { favorites: true },
                         }}
                     >
                         <Star className="h-4 w-4 mr-2" />

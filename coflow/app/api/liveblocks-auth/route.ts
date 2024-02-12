@@ -7,13 +7,12 @@ import { api } from "@/convex/_generated/api";
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
 const liveblocks = new Liveblocks({
-    secret: "sk_dev_39hTVBoQEVgyMrhq-1PNdVrfelSalSgeK9VPliIfhVa-Qnt5GYri2i3VShebjkkw",
+    secret: process.env.LIVEBLOCKS_SECRET_KEY!,
 });
 
 export async function POST(request: Request) {
     const authorization = await auth();
     const user = await currentUser();
-
 
     if (!authorization || !user) {
         return new Response("Unauthorized", { status: 403 });
@@ -27,10 +26,9 @@ export async function POST(request: Request) {
     }
 
     const userInfo = {
-        name: user.firstName || "Teammate",
+        name: user.firstName || "Teammeate",
         picture: user.imageUrl,
     };
-
 
     const session = liveblocks.prepareSession(user.id, { userInfo });
 
@@ -39,7 +37,5 @@ export async function POST(request: Request) {
     }
 
     const { status, body } = await session.authorize();
-    
     return new Response(body, { status });
 }
-

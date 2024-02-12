@@ -1,10 +1,10 @@
 "use client";
 
 import { toast } from "sonner";
-import { Button } from "./ui/button";
 import { Link2, Pencil, Trash2 } from "lucide-react";
 import { DropdownMenuContentProps } from "@radix-ui/react-dropdown-menu";
 
+import { ConfirmModal } from "@/components/confirm-modal";
 import {
     DropdownMenu,
     DropdownMenuTrigger,
@@ -12,14 +12,12 @@ import {
     DropdownMenuItem,
     DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-
 import { api } from "@/convex/_generated/api";
 import { useApiMutation } from "@/hooks/use-api-mutation";
-
-import { ConfirmModal } from "@/components/confirm-modal";
+import { Button } from "@/components/ui/button";
 import { useRenameModal } from "@/store/use-rename-modal";
 
-interface ActionProps {
+interface ActionsProps {
     children: React.ReactNode;
     side?: DropdownMenuContentProps["side"];
     sideOffset?: DropdownMenuContentProps["sideOffset"];
@@ -33,7 +31,7 @@ export const Actions = ({
     sideOffset,
     id,
     title,
-}: ActionProps) => {
+}: ActionsProps) => {
     const { onOpen } = useRenameModal();
     const { mutate, pending } = useApiMutation(api.board.remove);
 
@@ -41,7 +39,7 @@ export const Actions = ({
         navigator.clipboard
             .writeText(`${window.location.origin}/board/${id}`)
             .then(() => toast.success("Link copied"))
-            .catch(() => toast.error("Failed  to copy link"));
+            .catch(() => toast.error("Failed to copy link"));
     };
 
     const onDelete = () => {
@@ -66,7 +64,6 @@ export const Actions = ({
                     <Link2 className="h-4 w-4 mr-2" />
                     Copy board link
                 </DropdownMenuItem>
-
                 <DropdownMenuItem
                     onClick={() => onOpen(id, title)}
                     className="p-3 cursor-pointer"
@@ -74,7 +71,6 @@ export const Actions = ({
                     <Pencil className="h-4 w-4 mr-2" />
                     Rename
                 </DropdownMenuItem>
-
                 <ConfirmModal
                     header="Delete board?"
                     description="This will delete the board and all of its contents."

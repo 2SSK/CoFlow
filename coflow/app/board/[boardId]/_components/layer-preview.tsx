@@ -2,20 +2,19 @@
 
 import { memo } from "react";
 
-import { NoteLayer } from "@/types/canvas";
+import { colorToCss } from "@/lib/utils";
 import { LayerType } from "@/types/canvas";
 import { useStorage } from "@/liveblocks.config";
 
-import { Note } from "./note";
 import { Text } from "./text";
 import { Ellipse } from "./ellipse";
 import { Rectangle } from "./rectangle";
+import { Note } from "./note";
 import { Path } from "./path";
-import { colorToCss } from "@/lib/utils";
 
 interface LayerPreviewProps {
     id: string;
-    onLayerPointerDown: (e: React.PointerEvent, layerId: string) => void; // TODO: Fix types
+    onLayerPointerDown: (e: React.PointerEvent, layerId: string) => void;
     selectionColor?: string;
 }
 
@@ -72,12 +71,12 @@ export const LayerPreview = memo(
                     <Rectangle
                         id={id}
                         layer={layer}
-                        onPointDown={onLayerPointerDown}
+                        onPointerDown={onLayerPointerDown}
                         selectionColor={selectionColor}
                     />
                 );
             default:
-                console.warn("unknown layer type");
+                console.warn("Unknown layer type");
                 return null;
         }
     }

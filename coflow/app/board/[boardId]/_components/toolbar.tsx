@@ -36,7 +36,11 @@ export const Toolbar = ({
                 <ToolButton
                     label="Select"
                     icon={MousePointer2}
-                    onClick={() => setCanvasState({ mode: CanvasMode.None })}
+                    onClick={() =>
+                        setCanvasState({
+                            mode: CanvasMode.None,
+                        })
+                    }
                     isActive={
                         canvasState.mode === CanvasMode.None ||
                         canvasState.mode === CanvasMode.Translating ||
@@ -45,7 +49,6 @@ export const Toolbar = ({
                         canvasState.mode === CanvasMode.Resizing
                     }
                 />
-
                 <ToolButton
                     label="Text"
                     icon={Type}
@@ -60,7 +63,6 @@ export const Toolbar = ({
                         canvasState.layerType === LayerType.Text
                     }
                 />
-
                 <ToolButton
                     label="Sticky note"
                     icon={StickyNote}
@@ -75,7 +77,6 @@ export const Toolbar = ({
                         canvasState.layerType === LayerType.Note
                     }
                 />
-
                 <ToolButton
                     label="Rectangle"
                     icon={Square}
@@ -90,7 +91,6 @@ export const Toolbar = ({
                         canvasState.layerType === LayerType.Rectangle
                     }
                 />
-
                 <ToolButton
                     label="Ellipse"
                     icon={Circle}
@@ -105,15 +105,17 @@ export const Toolbar = ({
                         canvasState.layerType === LayerType.Ellipse
                     }
                 />
-
                 <ToolButton
                     label="Pen"
                     icon={Pencil}
-                    onClick={() => setCanvasState({ mode: CanvasMode.Pencil })}
+                    onClick={() =>
+                        setCanvasState({
+                            mode: CanvasMode.Pencil,
+                        })
+                    }
                     isActive={canvasState.mode === CanvasMode.Pencil}
                 />
             </div>
-
             <div className="bg-white rounded-md p-1.5 flex flex-col items-center shadow-md">
                 <ToolButton
                     label="Undo"
@@ -121,7 +123,6 @@ export const Toolbar = ({
                     onClick={undo}
                     isDisabled={!canUndo}
                 />
-
                 <ToolButton
                     label="Redo"
                     icon={Redo2}
