@@ -53,7 +53,7 @@ export const Info = ({ boardId }: InfoProps) => {
                                 font.className
                             )}
                         >
-                            Board
+                            CoFlow
                         </span>
                     </Link>
                 </Button>
