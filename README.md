@@ -1,36 +1,55 @@
-# CoFlow
+# Coflow
+
+Welcome to Coflow, a Miro clone project built using Next.js, Convex, and Clerk.
+
+## Introduction
 
 CoFlow is a collaborative platform designed for efficient team collaboration, brainstorming, and project planning. It provides a virtual canvas for teams to ideate and innovate in real-time.
 
+## Tech Stack
+
+- **Next.js**: Next.js is a React framework that enables server-side rendering and provides a straightforward way to build React applications.
+  
+- **Convex**: Convex is a library for building collaborative applications. It provides real-time synchronization capabilities, making it perfect for collaborative whiteboarding applications like Coflow.
+  
+- **Clerk**: Clerk is a user authentication and identity management service. It simplifies the process of adding authentication to your application, providing features like social login, passwordless authentication, and more.
+
 ## Features
 
-- **Real-time Collaboration:** Work together with your team members, regardless of location.
-- **Flexible Canvas:** Create boards with a variety of elements, including sticky notes, images, and diagrams.
-- **Project Planning:** Use coFlow for project management, agile workflows, and design thinking.
-- **Version Control:** Keep track of changes with Git integration.
+- **Real-time Collaboration**: Multiple users can collaborate on the same whiteboard in real-time, with changes synchronized instantly across all clients.
+  
+- **User Authentication**: Secure user authentication powered by Clerk, allowing users to sign up, log in, and manage their accounts.
+  
+- **Whiteboard Tools**: A variety of tools for creating and editing whiteboard content, including drawing tools, text tools, shape tools, and more.
 
 ## Getting Started
 
-Follow these steps to set up coFlow locally:
+To get started with Coflow, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/SauravSinghKarmwar/CoFlow.git`
-2. Install dependencies: `npm install` (install nextJs, reactJs, tailwind)
-3. Start the development server: `npm start` (or relevant command)
+1. Clone this repository: `git clone <repository-url>`
+2. Install dependencies: `npm install`
+3. Set up Clerk: Follow the instructions provided by Clerk to set up authentication for your application.
+4. Start the development server: `npm run dev`
+5. Open your browser and navigate to `http://localhost:3000` to view Coflow.
 
-## Branching and Pull Requests
+## Preview
 
-- **Main Branch:** The `main` branch is the stable production-ready branch.
-- **Feature Branches:** Create branches for new features, bug fixes, or enhancements.
-  - Naming convention: `feature/feature-name` or `bugfix/issue-number`
-- **Pull Requests:** Submit pull requests for code review before merging changes into the `main` branch.
+![Coflow Preview](preview.png)
 
-## Commits Conventions
+## Hosted Version
 
-- **Type:** Choose from: `feat`, `chore`, `docs`, `style`, `refactor`, `test`, `fix`
-- **Example:** `git commit -m "feat: add real-time collaboration feature"`
+You can access the hosted version of Coflow [here](https://co-flow-sauravsinghkarmwars-projects.vercel.app/).
 
-## Contributors
+## Contributing
 
-- S A U R A V (@SauravSinghKarmwar)
+Contributions to Coflow are welcome! If you'd like to contribute, please follow these steps:
 
-Feel free to contribute, report issues, or suggest improvements!
+1. Fork the repository
+2. Create a new branch: `git checkout -b feature/my-feature`
+3. Make your changes and commit them: `git commit -am 'Add new feature'`
+4. Push to the branch: `git push origin feature/my-feature`
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
