@@ -1,9 +1,5 @@
 # Coflow
 
-Welcome to Coflow, a Miro clone project built using Next.js, Convex, and Clerk.
-
-## Introduction
-
 CoFlow is a collaborative platform designed for efficient team collaboration, brainstorming, and project planning. It provides a virtual canvas for teams to ideate and innovate in real-time.
 
 ## Tech Stack
@@ -22,16 +18,6 @@ CoFlow is a collaborative platform designed for efficient team collaboration, br
   
 - **Whiteboard Tools**: A variety of tools for creating and editing whiteboard content, including drawing tools, text tools, shape tools, and more.
 
-## Getting Started
-
-To get started with Coflow, follow these steps:
-
-1. Clone this repository: `git clone <repository-url>`
-2. Install dependencies: `npm install`
-3. Set up Clerk: Follow the instructions provided by Clerk to set up authentication for your application.
-4. Start the development server: `npm run dev`
-5. Open your browser and navigate to `http://localhost:3000` to view Coflow.
-
 ## Preview
 
 ![Coflow Preview](preview.png)
@@ -40,16 +26,4 @@ To get started with Coflow, follow these steps:
 
 You can access the hosted version of Coflow [here](https://co-flow-sauravsinghkarmwars-projects.vercel.app/).
 
-## Contributing
 
-Contributions to Coflow are welcome! If you'd like to contribute, please follow these steps:
-
-1. Fork the repository
-2. Create a new branch: `git checkout -b feature/my-feature`
-3. Make your changes and commit them: `git commit -am 'Add new feature'`
-4. Push to the branch: `git push origin feature/my-feature`
-5. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
