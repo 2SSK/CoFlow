@@ -20,7 +20,7 @@ CoFlow is a collaborative platform designed for efficient team collaboration, br
 
 ## Preview
 
-![Coflow Preview](preview.png)
+![Coflow Preview](./coflow/public/Preview.png)
 
 ## Hosted Version
 
